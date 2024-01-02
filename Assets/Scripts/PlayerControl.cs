@@ -156,7 +156,7 @@ namespace Builds
         private void ShowWinScreen()
         {
             _showWinScreen = true;
-            GetComponent<SetGunsIntoCamera>().DisableFireGuns();
+            GetComponent<SetGunsIntoCamera>().DisableFireGun();
             Time.timeScale = 0f;
         }
         //нашел герб - выиграл
