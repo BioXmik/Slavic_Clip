@@ -15,6 +15,7 @@
 /// </summary>
 
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
@@ -68,6 +69,8 @@ namespace Builds
     // Класс оружия сам управляет механикой оружия
     public class Weapon : NetworkBehaviour
 	{
+        private Slider reloadGunSlier;
+
 		// Тип оружия
 		public WeaponType type = WeaponType.Projectile;     // Какую систему вооружения следует использовать
 
@@ -216,6 +219,7 @@ namespace Builds
 			{
                 this.GetComponent<Weapon>().enabled = false;
             }
+			reloadGunSlier = GameObject.FindGameObjectWithTag("SliderGunReload").GetComponent<Slider>();
             // Рассчитайте фактическую КРЫШУ, которая будет использоваться в системах вооружения. Переменная скорострельности равна
             // разработанный для облегчения работы пользователя - он отображает количество выстрелов, которые необходимо произвести
             // в секунду. Здесь вычисляется фактическое десятичное значение ROF, которое можно использовать с таймерами.
@@ -1064,10 +1068,22 @@ namespace Builds
 			currentAmmo = ammoCapacity;
 			fireTimer = -reloadTime;
 			GetComponent<AudioSource>().PlayOneShot(reloadSound);
+			StartCoroutine(SliderReloadVisual());
 
             // Отправьте сообщение, чтобы пользователи могли выполнять другие действия всякий раз, когда это происходит
             SendMessageUpwards("OnEasyWeaponsReload", SendMessageOptions.DontRequireReceiver);
 		}
+
+		private IEnumerator SliderReloadVisual()
+		{
+			reloadGunSlier.maxValue = reloadTime;
+			for (float i = 0; i < reloadTime; i += 0.01f)
+			{
+				yield return new WaitForSeconds(0.0075f);
+				reloadGunSlier.value = i;
+			}
+            reloadGunSlier.value = 0;
+        }
 
         // Когда оружие пытается выстрелить без каких-либо боеприпасов
 

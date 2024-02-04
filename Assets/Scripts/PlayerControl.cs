@@ -1,5 +1,6 @@
 using UnityEngine;
 using Mirror;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 namespace Builds
@@ -7,6 +8,10 @@ namespace Builds
     [RequireComponent(typeof(PlayerMotor))]
     public class PlayerControl : NetworkBehaviour
     {
+        private Stats stats;
+        public GameObject endGameScreen;
+        public Text name;
+        public Text score;
         public string _labelText = "Возьмите с землице русской шесть вещиц, чтобы супостатов бить или найдите символ величия государства православного, совершив, во Славу памяти места священного, славянский зажим ящерам перевоплотившимся!";
         private Animate _anim;
         public float _speed = 5f;
@@ -24,7 +29,7 @@ namespace Builds
         public bool _isPlayedWin = true;
         [SerializeField]
         private AudioSource _gameWin;
-        private int _weaponsCollected = 0;
+        public int _weaponsCollected = 0;
         private int _maxItems = 6;
         public GameObject _BG;
         [SerializeField]
@@ -41,6 +46,7 @@ namespace Builds
             _audioSource = GetComponent<AudioSource>();
             _currentHealth = _startingHealth;
             _player = GameObject.FindWithTag("Player");
+            stats = GameObject.FindGameObjectWithTag("Stats").GetComponent<Stats>();
             if (isLocalPlayer)
             {
                 _BG.SetActive(true);
@@ -122,6 +128,19 @@ namespace Builds
             #endregion
 
             LossFell();
+
+            if (isServer)
+            {
+                stats.stats.Clear();
+                GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                for (int i = 0; i < players.Length; i++)
+                {
+                    PlayerStats playerStats = new PlayerStats();
+                    playerStats.name = players[i].name;
+                    playerStats.count = players[i].GetComponent<PlayerControl>()._weaponsCollected;
+                    stats.stats.Add(playerStats);
+                }
+            }
         }
         //здоровье игрока
         public int CurrentHealth
@@ -201,6 +220,9 @@ namespace Builds
                 _gameWin.Play();
             }
             _isPlayedWin = false;
+            endGameScreen.SetActive(true);
+            name.text = stats.name.text;
+            score.text = stats.score.text;
             if (GUI.Button(new Rect(Screen.width / 2 - 250,
               Screen.height / 2 - 50, 400, 100), "СЛАВЬСЯ РУСЬ-МАТУШКА! МЫ ПОБЕДИЛИ!"))
             {
@@ -238,6 +260,9 @@ namespace Builds
                 _gameOver.Play();
             }
             _labelText = "Бесконечно-вечное близко!";
+            endGameScreen.SetActive(true);
+            name.text = stats.name.text;
+            score.text = stats.score.text;
             if (GUI.Button(new Rect(Screen.width / 2 - 250,
             Screen.height / 2 - 50, 400, 100), "НУ КАК ЖЕ ТАК, БОГАТЫРЬ!"))
             {

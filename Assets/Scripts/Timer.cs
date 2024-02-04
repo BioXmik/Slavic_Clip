@@ -13,7 +13,7 @@ namespace Builds
         [SerializeField]
         private Text _timerText;
         private PlayerControl _text;
-        private GameObject _BG;
+        public GameObject _BG;
         public AudioSource _gameOver;
         private PlayerControl _isPlayedWin;
         private PlayerControl _showWinScreen;
@@ -26,7 +26,6 @@ namespace Builds
         {
             _timerText.text = _timerStart.ToString();
             _text = GetComponent<PlayerControl>();
-            _BG = GameObject.Find("BG");
             _isPlayedWin = GetComponent<PlayerControl>();
             _showWinScreen = GetComponent<PlayerControl>();
             _player1 = GameObject.Find("Player1");
