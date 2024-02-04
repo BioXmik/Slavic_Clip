@@ -10,6 +10,7 @@ namespace Builds
     {
         private Stats stats;
         public GameObject endGameScreen;
+        public GameObject statsPrefab;
         public Text name;
         public Text score;
         public string _labelText = "Возьмите с землице русской шесть вещиц, чтобы супостатов бить или найдите символ величия государства православного, совершив, во Славу памяти места священного, славянский зажим ящерам перевоплотившимся!";

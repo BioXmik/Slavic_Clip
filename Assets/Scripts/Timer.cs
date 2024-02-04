@@ -34,23 +34,21 @@ namespace Builds
 
         private void Update()
         {
-            if (_player1 = GameObject.Find("Player1"))
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            if (players.Length >= 2)
             {
-                if (_player2 = GameObject.Find("Player2"))
-               {
-                    _timerStart -= Time.deltaTime;
-                    _timerText.text = Mathf.Round(_timerStart).ToString();
-                    if (_timerStart <= 0)
-                    {
-                        _showLossScreen = true;
-                        _BG.SetActive(false);
-                        Time.timeScale = 0f;
-                    }
-
-                    if (_showWinScreen._showWinScreen == true)
-                        if (_isPlayedWin._isPlayedWin == false)
-                            _BG.SetActive(false);
+                _timerStart -= Time.deltaTime;
+                _timerText.text = Mathf.Round(_timerStart).ToString();
+                if (_timerStart <= 0)
+                {
+                    _showLossScreen = true;
+                    _BG.SetActive(false);
+                    Time.timeScale = 0f;
                 }
+
+                if (_showWinScreen._showWinScreen == true)
+                    if (_isPlayedWin._isPlayedWin == false)
+                        _BG.SetActive(false);
             }
         }        
         private void OnGUI()
