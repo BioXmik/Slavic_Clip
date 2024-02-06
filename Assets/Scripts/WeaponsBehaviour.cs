@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 namespace Builds
 {
@@ -5,18 +6,22 @@ namespace Builds
     {
         [SerializeField]
         private PlayerControl _weapons;
+        private List<string> players = new List<string>();
 
         void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.tag == "Player")
             {
-                _weapons = collision.gameObject.GetComponent<PlayerControl>();
-                DestroyMethod();
+                if (!players.Contains(collision.gameObject.name))
+                {
+                    _weapons = collision.gameObject.GetComponent<PlayerControl>();
+                    DestroyMethod(collision.gameObject);
+                }
             }
         }       
-        public void DestroyMethod()
+        public void DestroyMethod(GameObject player)
         {
-            Destroy(transform.gameObject);
+            players.Add(gameObject.name);
             Debug.Log("Here it is the weapon of the Russian land, in your hands!");
             _weapons.Weapons += 1;
         }
