@@ -57,44 +57,35 @@ namespace Builds
         //звуковой эффект при столкновении с оружием
         void OnCollisionEnter(Collision collision)
         {
-            if (isLocalPlayer)
+            if (collision.gameObject.name == "Rail Gun")
             {
-                if (collision.gameObject.name == "Rail Gun")
-                {
-                    _audioSource.PlayOneShot(_itemClip);
-                    Debug.Log("Here it is the weapon of the Russian land, in your hands!");
-                    collision.gameObject.SetActive(false);
-                }
-                if (collision.gameObject.name == "Shotgun")
-                {
-                    _audioSource.PlayOneShot(_itemClip);
-                    Debug.Log("Here it is the weapon of the Russian land, in your hands!");
-                    collision.gameObject.SetActive(false);
-                }
-                if (collision.gameObject.name == "Beam Gun")
-                {
-                    _audioSource.PlayOneShot(_itemClip);
-                    Debug.Log("Here it is the weapon of the Russian land, in your hands!");
-                    collision.gameObject.SetActive(false);
-                }
-                if (collision.gameObject.name == "M4")
-                {
-                    _audioSource.PlayOneShot(_itemClip);
-                    Debug.Log("Here it is the weapon of the Russian land, in your hands!");
-                    collision.gameObject.SetActive(false);
-                }
-                if (collision.gameObject.name == "Pistol")
-                {
-                    _audioSource.PlayOneShot(_itemClip);
-                    Debug.Log("Here it is the weapon of the Russian land, in your hands!");
-                    collision.gameObject.SetActive(false);
-                }
-                if (collision.gameObject.name == "Rocket Launcher")
-                {
-                    _audioSource.PlayOneShot(_itemClip);
-                    Debug.Log("Here it is the weapon of the Russian land, in your hands!");
-                    collision.gameObject.SetActive(false);
-                }
+                _audioSource.PlayOneShot(_itemClip);
+                Debug.Log("Here it is the weapon of the Russian land, in your hands!");
+            }
+            if (collision.gameObject.name == "Shotgun")
+            {
+                _audioSource.PlayOneShot(_itemClip);
+                Debug.Log("Here it is the weapon of the Russian land, in your hands!");
+            }
+            if (collision.gameObject.name == "Beam Gun")
+            {
+                _audioSource.PlayOneShot(_itemClip);
+                Debug.Log("Here it is the weapon of the Russian land, in your hands!");
+            }
+            if (collision.gameObject.name == "M4")
+            {
+                _audioSource.PlayOneShot(_itemClip);
+                Debug.Log("Here it is the weapon of the Russian land, in your hands!");
+            }
+            if (collision.gameObject.name == "Pistol")
+            {
+                _audioSource.PlayOneShot(_itemClip);
+                Debug.Log("Here it is the weapon of the Russian land, in your hands!");
+            }
+            if (collision.gameObject.name == "Rocket Launcher")
+            {
+                _audioSource.PlayOneShot(_itemClip);
+                Debug.Log("Here it is the weapon of the Russian land, in your hands!");
             }
         }
         private void Update()

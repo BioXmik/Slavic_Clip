@@ -13,58 +13,52 @@ namespace Builds
         private GameObject _cam;
         private GameObject _currentGun;
 
-        void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter(Collider other)
         {
             if (isLocalPlayer)
             {
-                if (collision.gameObject.name == "Rail Gun")
+                if (other.gameObject.name == "Rail Gun")
                 {
-                    Destroy(collision.gameObject);
                     DestroyGun();
                     _cam.transform.localPosition = new Vector3(0, 1.7f, 0.7f);
                     _currentGun = Instantiate(guns[0], _cam.transform);
                     weapons.Add(_currentGun.GetComponent<Weapon>());
                 }
 
-                if (collision.gameObject.name == "Shotgun")
+                if (other.gameObject.name == "Shotgun")
                 {
-                    Destroy(collision.gameObject);
                     DestroyGun();
                     _cam.transform.localPosition = new Vector3(0, 1.7f, 0.7f);
                     _currentGun = Instantiate(guns[1], _cam.transform);
                     weapons.Add(_currentGun.GetComponent<Weapon>());
                 }
 
-                if (collision.gameObject.name == "Beam Gun")
+                if (other.gameObject.name == "Beam Gun")
                 {
-                    Destroy(collision.gameObject);
                     DestroyGun();
                     _cam.transform.localPosition = new Vector3(0, 1.7f, 0.7f);
                     _currentGun = Instantiate(guns[2], _cam.transform);
                     weapons.Add(_currentGun.GetComponent<Weapon>());
                 }
 
-                if (collision.gameObject.name == "M4")
+                if (other.gameObject.name == "M4")
                 {
-                    Destroy(collision.gameObject);
                     DestroyGun();
                     _cam.transform.localPosition = new Vector3(0, 1.7f, 0.7f);
                     _currentGun = Instantiate(guns[3], _cam.transform);
                     weapons.Add(_currentGun.GetComponent<Weapon>());
                 }
 
-                if (collision.gameObject.name == "Pistol")
+                if (other.gameObject.name == "Pistol")
                 {
-                    Destroy(collision.gameObject);
                     DestroyGun();
                     _cam.transform.localPosition = new Vector3(0, 1.7f, 0.7f);
                     _currentGun = Instantiate(guns[4], _cam.transform);
                     weapons.Add(_currentGun.GetComponent<Weapon>());
                 }
 
-                if (collision.gameObject.name == "Rocket Launcher")
+                if (other.gameObject.name == "Rocket Launcher")
                 {
-                    Destroy(collision.gameObject);
                     DestroyGun();
                     _cam.transform.localPosition = new Vector3(0, 1.7f, 0.7f);
                     _currentGun = Instantiate(guns[5], _cam.transform);
